@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wobble &amp; Co. — Toys for curious little people</title>
+    <meta name="description" content="Wooden, plastic-free toys designed to make little minds go wow." />
+    <meta name="theme-color" content="#FFF7EC" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23FFC53D'/%3E%3Ccircle cx='24' cy='27' r='4' fill='%232B1B4A'/%3E%3Ccircle cx='40' cy='27' r='4' fill='%232B1B4A'/%3E%3Cpath d='M20 38 Q32 50 44 38' stroke='%232B1B4A' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body class="is-loading">
+    <!-- Loader -->
+    <div class="loader" aria-hidden="true">
+      <div class="loader__stage">
+        <div class="loader__ball"></div>
+        <div class="loader__shadow"></div>
+      </div>
+      <p class="loader__text">Getting the toys out… <b>0</b>%</p>
+    </div>
+    <div class="wipe wipe--1" aria-hidden="true"></div>
+    <div class="wipe wipe--2" aria-hidden="true"></div>
+
+    <div class="cursor" aria-hidden="true"><span class="cursor__blob"></span><span class="cursor__label"></span></div>
+    <div class="confetti" aria-hidden="true"></div>
+    <canvas id="webgl" aria-hidden="true"></canvas>
+
+    <header class="nav">
+      <a href="#top" class="nav__logo" aria-label="Wobble and Co. home"><span>w</span><span>o</span><span>b</span><span>b</span><span>l</span><span>e</span><em>&amp;co</em></a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#shop">Shop</a><a href="#build">Build</a><a href="#play">Play</a><a href="#work">Our work</a><a href="#club">Club</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="nav__bag jelly" data-open-bag data-cursor="Bag">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8Z" fill="currentColor"/><path d="M9 8V6a3 3 0 0 1 6 0v2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+          <span class="nav__count" data-bag-count>0</span>
+        </button>
+        <button class="nav__burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </header>
+    <div class="menu" aria-hidden="true">
+      <a href="#shop" style="--c:#FF5A4E">Shop</a><a href="#build" style="--c:#FFC53D">Build</a><a href="#play" style="--c:#3DD6A5">Play</a><a href="#work" style="--c:#5BB8FF">Our work</a><a href="#club" style="--c:#8B6CFF">Club</a>
+    </div>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero" id="top">
+        <div class="hero__content">
+          <span class="pill hero__pill">✦ Wooden · Plastic-free · Ages 0–8</span>
+          <h1 class="hero__title">
+            <span class="w">Toys</span> <span class="w">that</span> <span class="w">make</span><br />
+            <span class="w hl">little
+              <svg class="hl__squiggle" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12 Q 20 2 36 12 T 68 12 T 100 12 T 132 12 T 164 12 T 196 12" /></svg>
+            </span> <span class="w">minds</span><br />
+            <span class="w">go</span> <span class="w wow"><span>W</span><span>O</span><span>W</span><span>!</span></span>
+          </h1>
+          <p class="hero__lead">Heirloom-quality toys, hand-painted with plant-based colours and designed with teachers, parents and one very honest panel of toddlers.</p>
+          <div class="hero__ctas">
+            <a href="#shop" class="btn btn--tomato jelly" data-cursor="Shop!">Shop toys</a>
+            <a href="#play" class="btn btn--white jelly">Let’s play</a>
+          </div>
+        </div>
+        <div class="sticker sticker--1" aria-hidden="true">
+          <svg viewBox="0 0 200 200"><defs><path id="c1" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0" /></defs><text><textPath href="#c1">100% eco wood · 100% eco wood · </textPath></text></svg>
+          <b>🌳</b>
+        </div>
+        <div class="sticker sticker--2" aria-hidden="true"><b>Free<br />shipping</b><small>over $60</small></div>
+        <p class="hero__hint"><span>👆</span> Psst… boop the toys!</p>
+      </section>
+
+      <!-- Ribbons -->
+      <section class="ribbons" aria-hidden="true">
+        <div class="ribbon ribbon--a" data-dir="1"><div class="ribbon__track"><span>Play</span><i>✦</i><span>Build</span><i>✦</i><span>Imagine</span><i>✦</i><span>Giggle</span><i>✦</i><span>Repeat</span><i>✦</i></div></div>
+        <div class="ribbon ribbon--b" data-dir="-1"><div class="ribbon__track"><span>Plastic-free</span><i>●</i><span>Safety tested</span><i>●</i><span>Made to last</span><i>●</i><span>Tiny-hand approved</span><i>●</i></div></div>
+      </section>
+
+      <!-- Ages -->
+      <section class="ages">
+        <div class="head">
+          <span class="kicker">Shop by age</span>
+          <h2 class="h2" data-pop>A perfect toy for <em>every</em> age</h2>
+        </div>
+        <div class="ages__grid">
+          <a href="#shop" class="age" style="--c:#FF8FC7" data-cursor="Go!"><span class="age__blob"></span><span class="age__art" data-art="duck"></span><strong>0–2</strong><span>Tiny tots</span></a>
+          <a href="#shop" class="age" style="--c:#FFC53D" data-cursor="Go!"><span class="age__blob"></span><span class="age__art" data-art="stacker"></span><strong>3–5</strong><span>Little explorers</span></a>
+          <a href="#shop" class="age" style="--c:#5BB8FF" data-cursor="Go!"><span class="age__blob"></span><span class="age__art" data-art="rocket"></span><strong>6–8</strong><span>Big imaginations</span></a>
+        </div>
+      </section>
+
+      <!-- Shop -->
+      <section class="shop section-wave" id="shop" data-wave="#FFEEDC">
+        <div class="head">
+          <span class="kicker">The toy shop</span>
+          <h2 class="h2" data-pop>Pick your <em>new</em> favourite</h2>
+        </div>
+        <div class="chips" role="tablist"><span class="chips__pill"></span></div>
+        <div class="grid"></div>
+      </section>
+
+      <!-- Build (pinned, 3D stacker) -->
+      <section class="build section-wave no-bg" id="build" data-wave="#FFF7EC">
+        <div class="build__text">
+          <span class="kicker">Learning through play</span>
+          <div class="build__count"><span class="build__roll"><span class="build__roll-in"><b>0</b><b>1</b><b>2</b><b>3</b><b>4</b><b>5</b><b>6</b></span></span><small>/ 6 pieces</small></div>
+          <div class="build__steps">
+            <div class="step"><h3>Colours <em>first</em></h3><p>Red, orange, yellow… every ring is a new word to learn and say out loud.</p></div>
+            <div class="step"><h3>Big to <em>small</em></h3><p>Sorting by size teaches order, patience and a little bit of maths.</p></div>
+            <div class="step"><h3>Tiny <em>hands</em></h3><p>Grabbing, lifting and threading builds fine-motor skills that last.</p></div>
+            <div class="step"><h3>Ta-<em>da!</em></h3><p>Finishing something all by yourself is the best feeling in the world.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Play (drag & throw) -->
+      <section class="play section-wave" id="play" data-wave="#FFD66B">
+        <div class="head">
+          <span class="kicker">The toy box</span>
+          <h2 class="h2" data-pop>Go on, <em>throw</em> them around</h2>
+          <p class="play__sub">Grab any toy, drag it, fling it. We won’t tell.</p>
+        </div>
+        <div class="toybox">
+          <div class="toybox__floor"></div>
+          <button class="btn btn--ink jelly toybox__shake">Shake the box!</button>
+        </div>
+      </section>
+
+      <!-- Work (deck fans out) -->
+      <section class="work section-wave" id="work" data-wave="#8B6CFF">
+        <div class="head head--light">
+          <span class="kicker">Our work</span>
+          <h2 class="h2" data-pop>Things we’ve <em>dreamed up</em></h2>
+        </div>
+        <div class="deck"></div>
+      </section>
+
+      <!-- Reviews -->
+      <section class="reviews section-wave" data-wave="#FFF7EC">
+        <div class="head">
+          <span class="kicker">Happy families</span>
+          <h2 class="h2" data-pop>Parents say <em>the nicest</em> things</h2>
+        </div>
+        <div class="reviews__row" data-dir="1"></div>
+        <div class="reviews__row" data-dir="-1"></div>
+      </section>
+
+      <!-- Club -->
+      <section class="club section-wave" id="club" data-wave="#FF5A4E">
+        <span class="float" data-speed="1.2" style="left:6%;top:18%"><i class="shape shape--star"></i></span>
+        <span class="float" data-speed="-0.8" style="right:8%;top:14%"><i class="shape shape--circle"></i></span>
+        <span class="float" data-speed="0.6" style="left:12%;bottom:12%"><i class="shape shape--square"></i></span>
+        <span class="float" data-speed="-1.4" style="right:14%;bottom:16%"><i class="shape shape--tri"></i></span>
+        <div class="club__inner">
+          <span class="kicker kicker--light">The Wobble Club</span>
+          <h2 class="h2" data-pop>Join the club, get <em>10% off</em></h2>
+          <p>Birthday surprises, new toy sneak peeks and play ideas — once a month, never spammy.</p>
+          <form class="club__form">
+            <input type="email" required placeholder="grown-up@email.com" aria-label="Email address" />
+            <button class="btn btn--sun jelly" type="submit">Sign me up!</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer section-wave" data-wave="#2B1B4A">
+      <div class="footer__big" aria-hidden="true"></div>
+      <div class="footer__cols">
+        <div><h5>Visit</h5><p>12 Marble Lane<br />Bristol, BS1 4QA</p></div>
+        <div><h5>Shop</h5><a href="#shop">All toys</a><a href="#play">Toy box</a><a href="#club">Gift cards</a></div>
+        <div><h5>Help</h5><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Toy safety</a></div>
+        <div><h5>Say hi</h5><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">hello@wobble.co</a></div>
+      </div>
+      <div class="footer__bottom"><span>© 2026 Wobble &amp; Co. Made with giggles.</span><a href="#top">Back to top ↑</a></div>
+    </footer>
+
+    <!-- Bag -->
+    <aside class="bag" aria-label="Shopping bag">
+      <div class="bag__overlay" data-close-bag></div>
+      <div class="bag__panel" data-lenis-prevent>
+        <div class="bag__head"><h3>Your bag <sup data-bag-count>0</sup></h3><button class="bag__close" data-close-bag aria-label="Close">✕</button></div>
+        <div class="bag__ship"><span></span><div><i></i></div></div>
+        <p class="bag__empty">It’s empty in here… the toys are lonely! 🧸</p>
+        <ul class="bag__list"></ul>
+        <div class="bag__foot">
+          <div class="bag__sub"><span>Subtotal</span><strong data-subtotal>$0</strong></div>
+          <button class="btn btn--tomato jelly bag__checkout">Checkout</button>
+        </div>
+      </div>
+    </aside>
+    <div class="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
